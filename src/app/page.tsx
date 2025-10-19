@@ -37,27 +37,28 @@ const LoginPage: React.FC = () => {
 
       try {
         const res = await staffLogin(values);
+        console.log('Login response:', res);
         toast.success('✅ Login Successful');
         resetForm();
         setTimeout(() => router.push('/dashboard'), 2000);
-      } catch (err: any) {
-        if (!err.response) {
-          toast.error('❌ Cannot reach the server. Is it running?');
-          return;
-        }
+      } catch (err: unknown) {
+        if (err && typeof err === 'object' && 'response' in err) {
+          const error = err as { response: { status: number; data?: { detail?: unknown } } };
+          const { status, data } = error.response;
+          let message = 'Login failed';
 
-        const { status, data } = err.response;
-        let message = 'Login failed';
-
-        if (status === 400 || status === 422) {
-          if (Array.isArray(data.detail)) {
-            message = data.detail[0]?.msg || message;
-          } else if (typeof data.detail === 'string') {
-            message = data.detail;
+          if (status === 400 || status === 422) {
+            if (Array.isArray(data?.detail)) {
+              message = data.detail[0]?.msg || message;
+            } else if (typeof data?.detail === 'string') {
+              message = data.detail;
+            }
           }
-        }
 
-        toast.error(`❌ ${message}`);
+          toast.error(`❌ ${message}`);
+        } else {
+          toast.error('❌ Cannot reach the server. Is it running?');
+        }
       }
       finally {
         setIsSubmitting(false);
