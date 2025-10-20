@@ -6,7 +6,7 @@ import XImage from "../../../public/pic.png";
 
 const Dashboard = () => {
   const [isLocked, setIsLocked] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes
+  const [timeLeft, setTimeLeft] = useState(900);
 
   useEffect(() => {
   const handleBeforeUnload = (e: BeforeUnloadEvent) => {

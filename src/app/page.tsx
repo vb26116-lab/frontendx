@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
         console.log('Login response:', res);
         toast.success('✅ Login Successful');
         resetForm();
-        setTimeout(() => router.push('/dashboard'), 2000);
+        setTimeout(() => router.push('/dashboard'), 1000);
       } catch (err: unknown) {
         if (err && typeof err === 'object' && 'response' in err) {
           const error = err as { response: { status: number; data?: { detail?: unknown } } };
@@ -57,7 +57,7 @@ const LoginPage: React.FC = () => {
 
           toast.error(`❌ ${message}`);
         } else {
-          toast.error('❌ Cannot reach the server. Is it running?');
+          toast.error('❌ Check your internet connection');
         }
       }
       finally {
@@ -68,8 +68,8 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex items-center">
-      <Toaster position="top-center" richColors /> {/* ✅ Sonner toaster */}
-      <div className="w-[80%] md:w-[70%] h-[70vh] mx-auto flex flex-col justify-center rounded border border-blue-400">
+      <Toaster position="top-center" richColors />
+      <div className="w-[70%] md:w-[70%] h-[60vh] md:h-[70vh] mx-auto flex flex-col justify-center rounded border border-white-400">
         <FaXTwitter className="text-6xl mx-auto " />
         <h1 className={`${outfit.className} m-2 text-4xl font-semibold text-center`}>
           Login
