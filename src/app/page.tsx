@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex items-center">
       <Toaster position="top-center" richColors />
-      <div className="w-[70%] md:w-[70%] h-[60vh] sm:h-[40vh] mx-auto flex flex-col justify-center rounded border border-white-400">
+      <div className="w-[70%] md:w-[70%] h-[60vh]  mx-auto flex flex-col justify-center rounded border border-white-400">
         <FaXTwitter className="text-6xl mx-auto " />
         <h1 className={`${outfit.className} m-2 text-4xl font-semibold text-center`}>
           Login
